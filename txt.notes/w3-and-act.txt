@@ -1,0 +1,96 @@
+S es tabla de proveedores
+P es tabla de partes
+SP es la relación muchos  a muchos de partes y proveedores
+
+1 Recupera todos los nombres de proveedores
+SELECT sname FROM s;
+
+2 Recupera los nombres de Proveedores que viven en London
+SELECT sname FROM s WHERE city LIKE 'London';
+
+3 Recupera las ciudades de los proveedores sin repetición
+SELECT DISTINCT(city) FROM s;
+
+4 Recupera toda la información de las partes rojas
+SELECT * FROM p WHERE color LIKE 'Red';
+
+5 Recupera toda la información de las partes que pesan menos de 15
+SELECT * FROM p WHERE weight < 15;
+
+6 Recupera el nombre de los proveedores con status 30
+SELECT sname FROM s WHERE status = 30;
+
+7 Recupera el nombre de los proveedores y su ciudad poniendo los resultados como nombre y como ciudad (en español)
+SELECT sname AS Nombre, city AS Ciudad FROM s;
+
+
+SELECT sname FROM s;
+SELECT sname FROM s WHERE city LIKE 'London';
+SELECT DISTINCT(city) FROM s;
+SELECT * FROM p WHERE color LIKE 'Red';
+SELECT * FROM p WHERE weight < 15;
+SELECT sname FROM s WHERE status = 30;
+SELECT sname AS Nombre, city AS Ciudad FROM s;
+
+
+
+________________________________________________________________________________________________________________________________________________________
+
+DISTINCT()	<- Distintos
+MIN()		<- Valor mínimo
+MAX()		<- Valor máximo
+COUNT()		<- Conteo
+SUM()		<- Suma numérica
+AVG()		<- Promedio numérico
+
+GROUP BY()	<- Agrupar por...
+ORDER BY()	<- Ordenar por...
+
+
+________________________________________________________________________________________________________________________________________________________
+
+
+1.- Mostrar el agrupamiento de cuantas piezas por colores, ordenadas por la cantidad 
+SELECT COUNT(*), color FROM p GROUP BY color ORDER BY COUNT(*);
+////////////////////////////////////SELECT SUM(qty), color FROM p INNER JOIN sp ON p.pnum = sp.pnum GROUP BY color ORDER BY SUM(qty);
+
+2.- Agrupar los proveedores por status
+SELECT COUNT(*), status FROM s GROUP BY status;
+
+3.- Agrupar de la relación sp por proveedor(nombre) y sumar la cantidad de piezas entregadas (qty)
+SELECT SUM(qty), sname FROM s INNER JOIN sp ON s.snum = sp.snum GROUP BY sname ORDER BY SUM(qty);
+
+4.- Consulta que agrupa la tabla de proveedores por Ciudad, cuantos hay?
+SELECT COUNT(*), city FROM s GROUP BY city;
+
+5.- Mostrar el nombre de las partes y cuantos proveedores las entregan.
+SELECT COUNT(*), pname FROM p INNER JOIN sp ON p.pnum = sp.pnum GROUP BY pname;
+
+
+1.- SELECT COUNT(*), color FROM p GROUP BY color ORDER BY COUNT(*);
+2.- SELECT COUNT(*), status FROM s GROUP BY status;
+3.- SELECT SUM(qty), sname FROM s INNER JOIN sp ON s.snum = sp.snum GROUP BY sname ORDER BY SUM(qty);
+4.- SELECT COUNT(*), city FROM s GROUP BY city;
+5.- SELECT COUNT(*), pname FROM p INNER JOIN sp ON p.pnum = sp.pnum GROUP BY pname;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

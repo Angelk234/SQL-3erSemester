@@ -1,0 +1,16 @@
+1.- Recuperar el nombre del autor, libro escrito y localización de todos los libros que esta registrados
+2.- Recuperar el nombre del usuario, telefono y nombre de libro que han sido prestados
+3.- Mostrar el nombre de los autores y el total de libros que tienen escritos
+4.- Mostrar el nombre de los usuarios y la cantidad de libros que han solicitado en prestamo
+5.- Mostrar el nombre de los usuarios y el nombre de los autores a quienes ha leído, considerar el uso de la clausula distinct.
+
+
+1.- SELECT AUTOR.Nombre as Autor, LIBRO.Titulo as 'Libro escrito', EJEMPLAR.Localizacion FROM (AUTOR INNER JOIN LIBRO ON AUTOR.Codigo = LIBRO.Codigo_Autor) INNER JOIN EJEMPLAR ON LIBRO.Codigo = EJEMPLAR.Codigo_Libro;
+
+2. SELECT USUARIO.Nombre, USUARIO.Telefono, LIBRO.Titulo FROM ((USUARIO INNER JOIN SACA ON USUARIO.Codigo = Saca.CodigoUsuario) INNER JOIN EJEMPLAR ON Saca.CodigoUsuario = EJEMPLAR.Codigo) INNER JOIN LIBRO ON EJEMPLAR.CodigoLibro = LIBRO.Codigo;
+
+3. SELECT Autor.Nombre, COUNT(LIBRO.Codigo) FROM (AUTOR INNER JOIN Escribe ON AUTOR.Codigo = Escribe.CodigoAutor) INNER JOIN LIBRO ON Escribe.CodigoLibro = LIBRO.Codigo GROUP BY AUTOR.Nombre
+
+4. SELECT USUARIO.Nombre, COUNT(Saca.CodigoEjemplar) FROM USUARIO INNER JOIN Saca ON USUARIO.Codigo = Saca.CodigoUsuario GROUP BY USUARIO.Nombre
+
+5. SELECT DISTINCT USUARIOS.Nombre, AUTOR.NOMBRE FROM ((((USUARIOS INNER JOIN USUARIO.Codigo = Saca.CodigoUsuario) INNER JOIN EJEMPLAR ON Saca.CodigoEjemplar = EJEMPLAR.Codigo) INNER JOIN LIBRO ON EJEMPLAR.CodigoLibro = LIBRO.CODIGO) INNER JOIN Escribe ON LIBRO.Codigo= Escribe.CodigoLibro) INNER JOIN AUTOR ON Escribe.CodigoAutor = AUTOR.Codigo;
